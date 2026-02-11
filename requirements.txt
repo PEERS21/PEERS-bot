@@ -1,0 +1,8 @@
+booktype
+pyrogram
+tgcrypto
+python-dotenv
+redis
+aiohttp
+requests
+sqlalchemy
