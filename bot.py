@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 from dotenv import dotenv_values
 
-config = dotenv_values(".env")
+config = dotenv_values("/run/secrets/peers_bot/.env")
 
 BOT_TOKEN = config.get("TG_BOT_TOKEN", "")
 API_ID = int(config.get("TG_API_ID", 0))
