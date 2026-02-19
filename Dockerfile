@@ -11,7 +11,9 @@ WORKDIR /app
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN git clone https://github.com/PEERS21/Common-python.git /app/common
-RUN pip install --no-cache-dir -r common/requirements.txt
+RUN pip install --no-cache-dir -r common/requirements.txt \
+ && pip uninstall -y redis || true \
+ && pip install --no-cache-dir "redis==7.2.0"
 
 RUN apt-get remove -y --purge gcc g++ make pkg-config git curl \
  && apt-get autoremove -y 
