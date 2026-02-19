@@ -2,25 +2,8 @@ FROM python:3.14-slim
 
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-        build-essential \   # gcc, g++, make
-        gcc \
-        g++ \
-        make \
-        pkg-config \
-        ca-certificates \
-        git \
-        curl \
-        libssl-dev \        # нужны многим крипто-библиотекам (openssl)
-        libffi-dev \        # нужен для cffi
-        libbz2-dev \
-        libreadline-dev \
-        libsqlite3-dev \
-        zlib1g-dev \
-        liblzma-dev \
-        libncurses5-dev \
-        libncursesw5-dev \ 
-&& rm -rf /var/lib/apt/lists/*
+ && apt-get install -y --no-install-recommends build-essential gcc g++ make pkg-config ca-certificates git curl libssl-dev libffi-dev libbz2-dev libreadline-dev libsqlite3-dev zlib1g-dev liblzma-dev libncurses5-dev libncursesw5-dev \ 
+ && rm -rf /var/lib/apt/lists/*
     
 
 WORKDIR /app
