@@ -10,24 +10,21 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 import redis.asyncio as aioredis
 from sqlalchemy import select
-
+from os import getenv
 from common.db_init import AsyncSessionLocal
 from common.db_models import Item
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-from dotenv import dotenv_values
 
-config = dotenv_values("/run/secrets/peers_bot/.env")
-
-BOT_TOKEN = config.get("TG_BOT_TOKEN", "")
-API_ID = int(config.get("TG_API_ID", 0))
-API_HASH = config.get("TG_API_HASH", "")
-REDIS_URL = config.get("REDIS_URL", "")
-TG_GROUP_ID = int(config.get("TG_GROUP_ID", ""))
-AUTH_STATIC_TOKEN = config.get("AUTH_STATIC_TOKEN", "")
-API_BASE_URL = config.get("API_BASE_URL", "")
+BOT_TOKEN = getenv("TG_BOT_TOKEN", "")
+API_ID = int(getenv("TG_API_ID", 0))
+API_HASH = getenv("TG_API_HASH", "")
+REDIS_URL = getenv("REDIS_URL", "")
+TG_GROUP_ID = int(getenv("TG_GROUP_ID", ""))
+AUTH_STATIC_TOKEN = getenv("AUTH_STATIC_TOKEN", "")
+API_BASE_URL = getenv("API_BASE_URL", "")
 
 app = Client("bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
