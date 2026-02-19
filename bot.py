@@ -1,4 +1,6 @@
 import asyncio
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
 import json
 import os
 import logging
@@ -123,9 +125,13 @@ def start_command(client, message):
 
 async def main():
     await app.start()
-    asyncio.create_task(redis_listener(app))
+    asyncio.create_task(redis_listener())
     await idle()
     await app.stop()
 
 if __name__ == "__main__":
-    app.run(main())
+    try:
+        loop.run_until_complete(main())
+    finally:
+        # корректно закрываем loop
+        loop.close()
