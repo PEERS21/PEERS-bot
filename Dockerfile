@@ -18,4 +18,14 @@ RUN pip install --no-cache-dir -r common/requirements.txt \
 RUN apt-get remove -y --purge gcc g++ make pkg-config git curl \
  && apt-get autoremove -y 
 
+
+RUN python - <<'PY'
+import importlib, sys
+r = importlib.import_module('redis')
+print('redis ok:', r.__version__, r.__file__)
+import redis.exceptions as exc
+print('DataError present:', hasattr(exc, 'DataError'), 'exceptions file:', getattr(exc, "__file__", None))
+PY
+
+
 CMD ["python", "bot.py"]
